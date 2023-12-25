@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace= "normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title th:text="${title}">Document</title>
+</head>
+<body>
+	
+	<section>
+	
+		<div class="card mr-3 ml-3">
+			<div class="card-body">
+				
+				<h1 class="text-center">Contacts</h1>
+				
+				
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">S.No.</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Phone No.</th>
+							<th scope="col">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="c: ${contacts}">
+							
+							<td th:text="'SCMUSER'+ ${c.cid}"></td>
+							<td>
+							<img class="my_profile" src="" th:src="@{'/image'+${c.image}}" alt="" />
+							<span th:text="${c.name}"></span> 
+							
+							
+							</td>
+							<td>
+							
+							<a href="" th:href="@{'/user/contact/'+${c.cid}}">
+							
+							<span th:text="${c.email}"></span>
+							</a>
+							
+							</td>
+							<td th:text="${c.phone}">@mdo</td>
+							<td>
+							
+								<button class="btn" ><i class="fas fa-edit"></i></button>
+								<button class="btn "><i class="fa fa-trash"></i></button>
+							</td>
+							
+						</tr>
+						
+					</tbody>
+				</table>
+				
+				<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li th:if="${currentpage != 0}" class="page-item ">
+      <a  th:href="@{'/user/view-contacts/'+${currentpage-1}}" class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    
+    <li th:classappend="${currentpage==i-1? 'active':''}" th:each="i: ${#numbers.sequence(1,totalpages)}" class="page-item"><a th:href="@{'/user/view-contacts/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span></a></li>
+   
+    <li th:if="${currentpage+1 != totalpages}" class="page-item">
+      <a th:href="@{'/user/view-contacts/'+${currentpage+1}}" class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+			</div>
+		
+		</div>
+		
+		
+
+	</section>
+	
+	
+</body>
+</html>
